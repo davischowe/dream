@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db/conn')
 
-const Usuario = sequelize.define('Usuario', {
+const Usuario = sequelize.define('Usuarios', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -20,7 +20,7 @@ const Usuario = sequelize.define('Usuario', {
     allowNull: false
   },
   email: {
-    type: DataTypes.STRING(30),
+    type: DataTypes.STRING(100),
     allowNull: false,
     unique: true,
     validate: {

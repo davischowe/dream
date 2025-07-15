@@ -1,8 +1,8 @@
 const Usuario = require('../model/Usuarios')
-const { OP } = require('sequelize')
+const { Op } = require('sequelize')
 
 const cadastrarUsuario = async (req,res) => {
-    const dados = req.body
+    const { dados } = req.body
     try{
         const valores = await Usuario.create(dados)
         res.status(201).json(valores)
@@ -27,9 +27,9 @@ const listarUsuarios = async (req,res) => {
     }
 }
 
-const atualiazrUsuarios = async (req,res) => {
-    const id = req.params.id
-    const dados = req.body
+const atualizarUsuario = async (req,res) => {
+    const { id } = req.params
+    const { dados } = req.body
     try{
         const valores = await Usuario.findByPk(id)
         if(valores === null){
@@ -46,8 +46,8 @@ const atualiazrUsuarios = async (req,res) => {
     }
 }
 
-const apagarUsuarios = async (req,res) => {
-    const id = req.params.id
+const apagarUsuario = async (req,res) => {
+    const { id } = req.params
     try{
         const valor = await Usuario.findByPk(id)
         if(valor === null){
@@ -63,22 +63,42 @@ const apagarUsuarios = async (req,res) => {
     }
 }
 
-const consultarNomeU = async (req, res) => {
-    const { nome } = req.body;
+const consultarNome = async (req, res) => {
+  const { nome } = req.query;
+  try {
+   const valores = await Usuario.findAll({
+  where: {
+    firstName: {
+      [Op.like]: `%${nome}%`
+    }
+  }
+});
+    if (valores === null) {
+      res.status(404).json({ message: 'Nenhum Usuario encontrado' });
+    } else {
+      res.status(200).json(valores);
+    }
+  } catch (err) {
+    console.error('Erro ao consultar nome:', err);
+    res.status(500).json({ message: 'Erro ao buscar Usuarios' });
+  }
+};
+
+const consultarPorId = async (req,res) => {
+    const { id } = req.params
     try {
-        const valores = await Usuario.findAll({
-            where: {
-                title: {
-                    [Op.like]: `%${nome}%`
-                }
-            }
-        });
-        return res.status(200).json(valores);
+        const usuario = await Usuario.findByPk(id);
+        if (usuario === null) {
+            return res.status(404).json({ message: "Usuário não encontrado." });
+        }else{
+           return res.status(200).json(usuario);
+        }
+        
     } catch (err) {
-        console.error("Erro ao consultar nome:", err);
-        return res.status(500).json({ error: "Erro ao buscar usuários." });
+        console.error("Erro ao consultar por ID:", err);
+        return res.status(500).json({ message: "Erro ao buscar usuário." });
     }
 };
 
 
-module.exports = {cadastrarUsuario, listarUsuarios, atualiazrUsuarios, apagarUsuarios}
+module.exports = {cadastrarUsuario, listarUsuarios, atualizarUsuario, apagarUsuario, consultarNome, consultarPorId}

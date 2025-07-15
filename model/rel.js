@@ -1,18 +1,9 @@
-const Usuário = require ('./Usuarios')
- const Produto = requer ('./Produto')
- const Compras = require ('./Compras')
+const Usuario = require('./Usuarios');
+const Produto = require('./Produto');
+const Compra = require('./Compras');
 
- Usuário.hasMany ( Compras , {
- foreignKey : 'usuarioId',
+Usuario.hasMany(Compra, { foreignKey: 'usuarioId' });
+Compra.belongsTo(Usuario, { foreignKey: 'usuarioId' });
 
- } )
- Compras.belongsTo ( Usuário , {
- foreignKey : 'usuarioId',
- 
- } )
- Produto.belongsTo ( Compras , {
- foreignKey : 'produtoId',
- } )
- Compras.hasMany ( Produto , {
- foreignKey : 'produtoId',
- } )
+Produto.hasMany(Compra, { foreignKey: 'produtoId' });
+Compra.belongsTo(Produto, { foreignKey: 'produtoId' });
