@@ -33,7 +33,7 @@ const Produto = sequelize.define('Produtos', {
   },
   brand: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   thumbnail: {
     type: DataTypes.STRING,

@@ -13,11 +13,11 @@ for (const item of produtosApi) {
     item.title &&
     item.description &&
     item.category &&
-    item.price !== undefined &&
-    item.discountPercentage !== undefined &&
-    item.stock !== undefined &&
-    item.brand &&
-    item.thumbnail
+    item.price &&
+    item.discountPercentage || 'N/A' &&
+    item.stock &&
+    item.brand || 'N/A' &&
+    item.thumbnail  || 'N/A'
   ) {
     dadosFormatados.push({
       title: item.title,
