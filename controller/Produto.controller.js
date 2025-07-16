@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 const cadastrarProduto = async (req, res) => {
     const { dados } = req.body;
     try {
-        const valores = await Produto.create(dados);
+        const valores = await Produto.bulkCreate(dados);
         res.status(201).json(valores);
     } catch (err) {
         console.error('Erro ao cadastrar os dados:', err);

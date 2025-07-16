@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="cadastrar.js" defer></script>
+    <title>Principal</title>
+</head>
+
+<body>
+    <h1>Cadastrar</h1>
+    <br>
+    <nav>
+        <a href="./index.html">Principal</a>
+        <a href="./cadastrar.html">Cadastrar</a>
+        <a href="./listarProdutos.html">Listar os Produtos</a>
+        <a href="./listarUsuarios.html">Listar os Usuarios</a>
+        <a href="./AtualizarProduto.html">Atualizar os Dados</a>
+        <a href="./apagar.html">Apagar os Dados</a>
+    </nav>
+    <br>
+    <label for="title">Título:</label>
+    <input type="text" id="title" required><br>
+    <label for="description">Descrição:</label>
+    <textarea id="description" required></textarea><br>
+    <label for="category">Categoria:</label>
+    <input type="text" id="category" required><br>
+    <label for="price">Preço:</label>
+    <input type="number" step="0.01" id="price" required><br>
+    <label for="discountPercentage">Desconto (%):</label>
+    <input type="number" step="0.01" id="discountPercentage" required><br>
+    <label for="stock">Estoque:</label>
+    <input type="number" id="stock" required><br>
+    <label for="brand">Marca:</label>
+    <input type="text" id="brand"><br>
+    <label for="thumbnail">Thumbnail (URL):</label>
+    <input type="url" id="thumbnail" required><br>
+
+    <button id="btnCadastrarProd">Cadastrar Produto</button>
+    <div id="resProd"></div>
+    <br>
+    <br>
+    <h2>Cadastrar Usuário</h2>
+
+    <label>First Name:</label>
+    <input type="text" id="firstName"><br>
+    <label>Last Name:</label>
+    <input type="text" id="lastName"><br>
+    <label>Age:</label>
+    <input type="number" id="age"><br>
+    <label>Email:</label>
+    <input type="email" id="email"><br>
+    <label>Phone:</label>
+    <input type="text" id="phone"><br>
+    <label>Address:</label>
+    <input type="text" id="address"><br>
+    <label>City:</label>
+    <input type="text" id="city"><br>
+    <label>State:</label>
+    <input type="text" id="state"><br>
+    <label>Birth Date:</label>
+    <input type="date" id="birthDate"><br>
+
+    <button id="btnCadastrarUser">Cadastrar Usuário</button>
+    <div id="resUser"></div>
+</body>
+
+</html>

@@ -4,7 +4,7 @@ const { Op } = require('sequelize')
 const cadastrarUsuario = async (req,res) => {
     const { dados } = req.body
     try{
-        const valores = await Usuario.create(dados)
+        const valores = await Usuario.bulkCreate(dados)
         res.status(201).json(valores)
     }catch(err){
         console.error('Erro ao Cadastrar os Dados')
@@ -101,4 +101,4 @@ const consultarPorId = async (req,res) => {
 };
 
 
-module.exports = {cadastrarUsuario, listarUsuarios, atualizarUsuario, apagarUsuario, consultarNome, consultarPorId}
+module.exports = {cadastrarUsuario, listarUsuarios, atualizarUsuario, apagarUsuario, consultarNome, consultarPorId, importarUsuarios}
