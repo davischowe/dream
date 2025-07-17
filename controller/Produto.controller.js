@@ -2,9 +2,9 @@ const Produto = require('../model/Produto');
 const { Op } = require('sequelize');
 
 const cadastrarProduto = async (req, res) => {
-    const { dados } = req.body;
+    const dados = req.body;
     try {
-        const valores = await Produto.bulkCreate(dados);
+        const valores = await Produto.create(dados);
         res.status(201).json(valores);
     } catch (err) {
         console.error('Erro ao cadastrar os dados:', err);
@@ -27,8 +27,8 @@ const listarProduto = async (req, res) => {
 };
 
 const atualizarProduto = async (req, res) => {
-    const { id } = req.params;
-    const { dados } = req.body;
+    const id = req.params;
+    const dados = req.body;
 
     try {
         const valores = await Produto.findByPk(id);
@@ -47,7 +47,7 @@ const atualizarProduto = async (req, res) => {
 };
 
 const apagarProduto = async (req, res) => {
-    const { id } = req.params;
+    const  id = req.params;
     try {
         const valores = await Produto.findByPk(id);
 
@@ -65,7 +65,7 @@ const apagarProduto = async (req, res) => {
 
 
 const consultarNome = async (req, res) => {
-  const { nome } = req.query;
+  const nome = req.query;
   try {
     const valores = await Produto.findAll({
       where: {
@@ -87,7 +87,7 @@ const consultarNome = async (req, res) => {
 };
 
 const consultarPorId = async (req, res) => {
-    const { id } = req.params;
+    const id = req.params;
 
     try {
         const valores = await Produto.findByPk(id);

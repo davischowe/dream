@@ -2,9 +2,9 @@ const Usuario = require('../model/Usuarios')
 const { Op } = require('sequelize')
 
 const cadastrarUsuario = async (req,res) => {
-    const { dados } = req.body
+    const dados = req.body
     try{
-        const valores = await Usuario.bulkCreate(dados)
+        const valores = await Usuario.create(dados)
         res.status(201).json(valores)
     }catch(err){
         console.error('Erro ao Cadastrar os Dados')
@@ -28,8 +28,8 @@ const listarUsuarios = async (req,res) => {
 }
 
 const atualizarUsuario = async (req,res) => {
-    const { id } = req.params
-    const { dados } = req.body
+    const id = req.params
+    const dados = req.body
     try{
         const valores = await Usuario.findByPk(id)
         if(valores === null){
@@ -47,7 +47,7 @@ const atualizarUsuario = async (req,res) => {
 }
 
 const apagarUsuario = async (req,res) => {
-    const { id } = req.params
+    const id = req.params
     try{
         const valor = await Usuario.findByPk(id)
         if(valor === null){
@@ -64,7 +64,7 @@ const apagarUsuario = async (req,res) => {
 }
 
 const consultarNome = async (req, res) => {
-  const { nome } = req.query;
+  const nome = req.query;
   try {
    const valores = await Usuario.findAll({
   where: {
@@ -85,7 +85,7 @@ const consultarNome = async (req, res) => {
 };
 
 const consultarPorId = async (req,res) => {
-    const { id } = req.params
+    const id = req.params
     try {
         const usuario = await Usuario.findByPk(id);
         if (usuario === null) {
@@ -101,4 +101,4 @@ const consultarPorId = async (req,res) => {
 };
 
 
-module.exports = {cadastrarUsuario, listarUsuarios, atualizarUsuario, apagarUsuario, consultarNome, consultarPorId, importarUsuarios}
+module.exports = {cadastrarUsuario, listarUsuarios, atualizarUsuario, apagarUsuario, consultarNome, consultarPorId}

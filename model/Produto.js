@@ -25,7 +25,7 @@ const Produto = sequelize.define('Produtos', {
   },
   discountPercentage: {
     type: DataTypes.FLOAT,
-    allowNull: false,
+    allowNull: true,
   },
   stock: {
     type: DataTypes.INTEGER,
@@ -37,7 +37,7 @@ const Produto = sequelize.define('Produtos', {
   },
   thumbnail: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       isUrl: true
     }
