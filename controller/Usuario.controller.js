@@ -28,7 +28,7 @@ const listarUsuarios = async (req,res) => {
 }
 
 const atualizarUsuario = async (req,res) => {
-    const id = req.params
+    const id = req.params.id
     const dados = req.body
     try{
         const valores = await Usuario.findByPk(id)
@@ -47,7 +47,7 @@ const atualizarUsuario = async (req,res) => {
 }
 
 const apagarUsuario = async (req,res) => {
-    const id = req.params
+    const id = req.params.id
     try{
         const valor = await Usuario.findByPk(id)
         if(valor === null){
@@ -85,7 +85,7 @@ const consultarNome = async (req, res) => {
 };
 
 const consultarPorId = async (req,res) => {
-    const id = req.params
+    const id = req.params.id
     try {
         const usuario = await Usuario.findByPk(id);
         if (usuario === null) {

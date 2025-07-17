@@ -27,7 +27,7 @@ const listarProduto = async (req, res) => {
 };
 
 const atualizarProduto = async (req, res) => {
-    const id = req.params;
+    const id = req.params.id;
     const dados = req.body;
 
     try {
@@ -47,7 +47,7 @@ const atualizarProduto = async (req, res) => {
 };
 
 const apagarProduto = async (req, res) => {
-    const  id = req.params;
+    const  id = req.params.id;
     try {
         const valores = await Produto.findByPk(id);
 
@@ -87,7 +87,7 @@ const consultarNome = async (req, res) => {
 };
 
 const consultarPorId = async (req, res) => {
-    const id = req.params;
+    const id = req.params.id;
 
     try {
         const valores = await Produto.findByPk(id);
