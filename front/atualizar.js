@@ -2,7 +2,7 @@ const btnAtualizarProd = document.getElementById('btnAtualizarProd');
 const resProd = document.getElementById('resProd');
 
 btnAtualizarProd.addEventListener('click', () => {
-    const id = Number(document.getElementById('id').value);
+    const id = Number(document.getElementById('prodId').value);
     const title = document.getElementById('title').value.trim();
     const description = document.getElementById('description').value.trim();
     const category = document.getElementById('category').value.trim();
@@ -59,9 +59,8 @@ btnAtualizarProd.addEventListener('click', () => {
 const btnAtualizarUser = document.getElementById("btnAtualizarUser");
 const resUser = document.getElementById("resUser");
 
-btnAtualizarUser.addEventListener("click", (e) => {
-    e.preventDefault();
-    const id = Number(document.getElementById('id').value);
+btnAtualizarUser.addEventListener("click", () => {
+    const id = Number(document.getElementById('userId').value);
     const firstName = document.getElementById("firstName").value.trim();
     const lastName = document.getElementById("lastName").value.trim();
     const age = parseInt(document.getElementById("age").value);

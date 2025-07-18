@@ -65,16 +65,15 @@ const apagarProduto = async (req, res) => {
 
 
 const consultarNome = async (req, res) => {
-  const nome = req.query;
+  const nome = String(req.query.nome || '');
   try {
     const valores = await Produto.findAll({
       where: {
-        title: {
-          [Op.like]: `%${nome}%`
-        }
-      }
+                title: {
+                    [Op.like]: `%${nome}%`
+                }
+            }
     });
-
     if (valores.length === 0) {
       res.status(404).json({ message: 'Nenhum produto encontrado' });
     } else {

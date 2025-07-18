@@ -1,7 +1,7 @@
 const Compra = require('../model/Compras')
 
 const cadastrarCompra = async (req, res) => {
-    const { dados } = req.body;
+    const dados = req.body;
     try {
         const valores = await Compra.create(dados);
         res.status(201).json(valores);
@@ -26,8 +26,8 @@ const listarCompras = async (req, res) => {
 };
 
 const atualizarCompra = async (req, res) => {
-    const { id } = req.params;
-    const { dados } = req.body;
+    const  id = req.params.id;
+    const dados = req.body;
 
     try {
         const valores = await Compra.findByPk(id);
@@ -45,7 +45,7 @@ const atualizarCompra = async (req, res) => {
 };
 
 const apagarCompra = async (req, res) => {
-    const { id } = req.params;
+    const id = req.params.id;
     try {
         const valores = await Compra.findByPk(id);
         if (valores === null) {
@@ -61,7 +61,7 @@ const apagarCompra = async (req, res) => {
 };
 
 const consultarPorId = async (req, res) => {
-    const { id } = req.params;
+    const id = req.params.id;
 
     try {
         const valores = await Compra.findByPk(id);
