@@ -12,6 +12,7 @@ const usuarioController = require('./controller/Usuario.controller')
 const produtoController = require('./controller/Produto.controller')
 const compraController = require('./controller/Compra.controller')
 const importarController = require('./controller/Importar.controller')
+const relatorioController = require('./controller/relatorios.controller');
 
 //-------------------------------------------
 app.use(express.urlencoded({ extended: true }))
@@ -41,6 +42,8 @@ app.delete('/compras/:id', compraController.apagarCompra);
 
 app.get('/importar-produtos',importarController.importarProdutos);
 app.get('/importar-usuarios', importarController.importarUsuarios);
+
+app.get('/relatorio/compras', relatorioController.relatorioCompras );
 
 
 conn.sync()
