@@ -7,12 +7,15 @@ const cors = require('cors')
 const PORT = process.env.PORT
 const hostname = process.env.DB_HOST
 
+
+
 const conn = require('./db/conn')
 const usuarioController = require('./controller/Usuario.controller')
 const produtoController = require('./controller/Produto.controller')
 const compraController = require('./controller/Compra.controller')
 const importarController = require('./controller/Importar.controller')
 const relatorioController = require('./controller/relatorios.controller');
+require('./model/rel')
 
 //-------------------------------------------
 app.use(express.urlencoded({ extended: true }))
@@ -40,10 +43,15 @@ app.get('/compras/:id', compraController.consultarPorId);
 app.put('/compras/:id', compraController.atualizarCompra);
 app.delete('/compras/:id', compraController.apagarCompra);
 
-app.get('/importar-produtos',importarController.importarProdutos);
-app.get('/importar-usuarios', importarController.importarUsuarios);
+app.post('/importar-produtos',importarController.importarProdutos);
+app.post('/importar-usuarios', importarController.importarUsuarios);
 
 app.get('/relatorio/compras', relatorioController.relatorioCompras );
+app.get('/relatorio/usuarios', relatorioController.relatorioUsuario );
+app.get('/relatorio/produtos', relatorioController.relatorioProduto );
+app.get('/relatorio/estoque', relatorioController.relatorioEstoqueCritico );
+app.get('/relatorio/geral', relatorioController.relatorioGeral);
+
 
 
 conn.sync()

@@ -3,11 +3,12 @@ const Compra = require('../model/Compras')
 const cadastrarCompra = async (req, res) => {
     const dados = req.body;
     try {
-        const valores = await Compra.create(dados);
-        res.status(201).json(valores);
+        const novaCompra = await Compra.create(dados);
+        console.log('Compra Cadastrada com sucesso')
+        res.status(201).json(novaCompra)
     } catch (err) {
-        console.error('Erro ao cadastrar os dados:', err);
-        res.status(500).json({ message: 'Erro ao cadastrar os dados' });
+        console.error('Erro ao cadastrar a compra:', err);
+        res.status(500).json({ message: 'Erro ao cadastrar a compra' });
     }
 };
 

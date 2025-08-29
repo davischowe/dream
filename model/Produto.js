@@ -8,7 +8,7 @@ const Produto = sequelize.define('produtos', {
     autoIncrement: true
   },
   title: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(300),
     allowNull: false
   },
   description: {

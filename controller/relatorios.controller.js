@@ -1,37 +1,96 @@
 const Compra = require('../model/Compras');
 const Usuario = require('../model/Usuarios');
 const Produto = require('../model/Produto');
+const { Op } = require('sequelize');
 
 async function relatorioCompras(req, res) {
   try {
     const compras = await Compra.findAll({
       include: [
-        { model: Usuario, as: 'usuario', attributes: ['firstName', 'lastName'] },
-        { model: Produto, as: 'produto', attributes: ['title'] }
+        {
+          model: Usuario,
+          as: 'usuario'
+        },
+        {
+          model: Produto,
+          as: 'produto'
+        }
       ]
     });
 
-    const dados = compras.map(c => ({
-      id: c.id,
-      usuario: c.usuario
-        ? `${c.usuario.firstName} ${c.usuario.lastName}`
-        : 'Usuário não encontrado',
-      produto: c.produto
-        ? c.produto.title
-        : 'Produto não encontrado',
-      quantidade: c.quantidade,
-      data: c.dataCompra ? new Date(c.dataCompra).toLocaleDateString('pt-BR') : 'Data inválida',
-      valor: typeof c.precoFinal === 'number' ? c.precoFinal.toFixed(2) : '0.00',
-      pagamento: c.formaPagamento || 'Não informado',
-      status: c.statusCompra || 'Indefinido'
-    }));
-
-    res.status(200).json(dados);
-
-  } catch (error) {
-    console.error('Erro ao gerar relatório de compras:', error);
-    res.status(500).json({ erro: 'Erro interno ao gerar relatório de compras.' });
+    res.json(compras);
+  } catch (err) {
+    console.error('Erro ao gerar relatório:', err);
+    res.status(500).json({ message: 'Erro ao gerar relatório' });
   }
 }
 
-module.exports = { relatorioCompras };
+
+async function relatorioUsuario(req, res) {
+  try {
+    const usuarios = await Usuario.findAll({
+      attributes: ['id', 'primeiroNome', 'sobrenome', 'idade', 'email', 'telefone', 'endereco', 'cidade', 'estado', 'dataNascimento'] 
+    });
+
+    res.json(usuarios);
+  } catch (err) {
+    console.error('Erro ao gerar relatório:', err);
+    res.status(500).json({ message: 'Erro ao gerar relatório' });
+  }
+}
+
+async function relatorioProduto(req, res) {
+  try {
+    const produtos = await Produto.findAll({
+      attributes: ['id', 'title', 'description', 'category', 'price', 'discountPercentage', 'stock', 'brand', 'thumbnail',] 
+    });
+
+    res.json(produtos);
+  } catch (err) {
+    console.error('Erro ao gerar relatório:', err);
+    res.status(500).json({ message: 'Erro ao gerar relatório' });
+  }
+}
+
+async function relatorioEstoqueCritico(req, res) {
+  try {
+    const produtos = await Produto.findAll({
+      where: {
+        stock: { [Op.lt]: 10 }
+      },
+      attributes: ['id', 'title', 'stock', 'category']
+    });
+
+    res.json(produtos);
+  } catch (err) {
+    console.error('Erro ao gerar relatório de estoque crítico:', err);
+    res.status(500).json({ message: 'Erro ao gerar relatório de estoque crítico' });
+  }
+}
+
+async function relatorioGeral(req, res) {
+  try {
+    const compras = await Compra.findAll({
+      include: [
+        {
+          model: Usuario,
+          as: 'usuario'
+        },
+        {
+          model: Produto,
+          as: 'produto'
+        }
+      ]
+    });
+
+    res.json(compras);
+  } catch (err) {
+    console.error('Erro ao gerar relatório:', err);
+    res.status(500).json({ message: 'Erro ao gerar relatório' });
+  }
+}
+
+
+
+module.exports = { relatorioCompras, relatorioUsuario, relatorioProduto, relatorioEstoqueCritico, relatorioGeral };
+

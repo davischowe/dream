@@ -55,8 +55,8 @@ btnUsuario.addEventListener('click', () => {
     .then(usuarios => {
       const filtrados = usuarios
         .filter(u => u.id >= idInicio && u.id <= idFim)
-      const labels = filtrados.map(u => `${u.firstName} ${u.lastName}`);
-      const dados = filtrados.map(u => u.age);
+      const labels = filtrados.map(u => `${u.primeiroNome} ${u.sobrenome}`);
+      const dados = filtrados.map(u => u.idade);
 
       if (chartUsuario) chartUsuario.destroy();
 

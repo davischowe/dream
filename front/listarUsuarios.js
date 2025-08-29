@@ -8,12 +8,12 @@ btnListarU.addEventListener('click', async () => {
       console.log(valores)
 
       valores.forEach(val => {
-        res.innerHTML += `Nome: ${val.firstName} ${val.lastName} <br>`;
-        res.innerHTML += `Idade: ${val.age} anos <br>`;
+        res.innerHTML += `Nome: ${val.primeiroNome} ${val.sobrenome} <br>`;
+        res.innerHTML += `Idade: ${val.idade} anos <br>`;
         res.innerHTML += `Email: ${val.email} <br>`;
-        res.innerHTML += `Telefone: ${val.phone} <br>`;
-        res.innerHTML += `Endereço: ${val.address}, ${val.city} - ${val.state} <br>`;
-        res.innerHTML += `Data de Nascimento: ${val.birthDate} <br>`;
+        res.innerHTML += `Telefone: ${val.telefone} <br>`;
+        res.innerHTML += `Endereço: ${val.endereco}, ${val.cidade} - ${val.estado} <br>`;
+        res.innerHTML += `Data de Nascimento: ${val.dataNascimento} <br>`;
         res.innerHTML += `<hr>`;
       })
 

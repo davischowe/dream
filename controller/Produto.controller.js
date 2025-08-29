@@ -2,13 +2,24 @@ const Produto = require('../model/Produto');
 const { Op } = require('sequelize');
 
 const cadastrarProduto = async (req, res) => {
-    const dados = req.body;
-    try {
-        const valores = await Produto.create(dados);
-        res.status(201).json(valores);
+  try {
+        let valores = req.body;
+        if (valores && valores.produtos) {
+            valores = valores.produtos;
+        }
+        if (!Array.isArray(valores)) {
+            return res.status(400).json({
+                message: "Formato inválido. Envie um array de produtos."
+            });
+        }
+        const dados = await Produto.bulkCreate(valores);
+        res.status(201).json(dados);
     } catch (err) {
-        console.error('Erro ao cadastrar os dados:', err);
-        res.status(500).json({ message: 'Erro ao cadastrar os dados' });
+        console.error("Erro ao cadastrar dados!", err);
+        res.status(500).json({
+            message: "Erro ao cadastrar os dados",
+            detalhe: err.message
+        });
     }
 };
 

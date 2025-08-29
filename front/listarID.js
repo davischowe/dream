@@ -9,12 +9,12 @@ btnListarUS.addEventListener('click', () => {
     fetch(`http://localhost:3000/usuarios/${id}`)
         .then(resp => resp.json())
         .then(valores => {
-            res.innerHTML += `Nome: ${valores.firstName} ${valores.lastName} <br>`;
-            res.innerHTML += `Idade: ${valores.age} anos <br>`;
+            res.innerHTML += `Nome: ${valores.primeiroNome} ${valores.sobrenome} <br>`;
+            res.innerHTML += `Idade: ${valores.idade} anos <br>`;
             res.innerHTML += `Email: ${valores.email} <br>`;
-            res.innerHTML += `Telefone: ${valores.phone} <br>`;
-            res.innerHTML += `Endereço: ${valores.address}, ${valores.city} - ${valores.state} <br>`;
-            res.innerHTML += `Data de Nascimento: ${valores.birthDate} <br>`;
+            res.innerHTML += `Telefone: ${valores.telefone} <br>`;
+            res.innerHTML += `Endereço: ${valores.endereco}, ${valores.cidade} - ${valores.estado} <br>`;
+            res.innerHTML += `Data de Nascimento: ${valores.dataNascimento} <br>`;
             res.innerHTML += `<hr>`;
         })
         .catch((err) => {

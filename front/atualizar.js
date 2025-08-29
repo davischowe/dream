@@ -61,41 +61,42 @@ const resUser = document.getElementById("resUser");
 
 btnAtualizarUser.addEventListener("click", () => {
     const id = Number(document.getElementById('userId').value);
-    const firstName = document.getElementById("firstName").value.trim();
-    const lastName = document.getElementById("lastName").value.trim();
-    const age = parseInt(document.getElementById("age").value);
+    const primeiroNome = document.getElementById("primeiroNome").value.trim();
+    const sobrenome = document.getElementById("sobrenome").value.trim();
+    const idade = parseInt(document.getElementById("idade").value);
     const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const address = document.getElementById("address").value.trim();
-    const city = document.getElementById("city").value.trim();
-    const state = document.getElementById("state").value.trim();
-    const birthDate = document.getElementById("birthDate").value.trim();
+    const telefone = document.getElementById("telefone").value.trim();
+    const endereco = document.getElementById("endereco").value.trim();
+    const cidade = document.getElementById("cidade").value.trim();
+    const estado = document.getElementById("estado").value.trim();
+    const dataNascimento = document.getElementById("dataNascimento").value.trim();
 
     if (
         isNaN(id) ||
-        !firstName ||
-        !lastName ||
-        isNaN(age) ||
+        !primeiroNome ||
+        !sobrenome ||
+        isNaN(idade) ||
         !email ||
-        !phone ||
-        !address ||
-        !city ||
-        !state
+        !telefone ||
+        !endereco ||
+        !cidade ||
+        !estado ||
+        !dataNascimento
     ) {
         resUser.innerHTML = `<strong style="color: red;">Preencha todos os campos obrigatórios corretamente.</strong>`;
         return;
     }
 
     const dados = {
-        firstName,
-        lastName,
-        age,
+        primeiroNome,
+        sobrenome,
+        idade,
         email,
-        phone,
-        address,
-        city,
-        state,
-        birthDate
+        telefone,
+        endereco,
+        cidade,
+        estado,
+        dataNascimento
     };
 
     resUser.innerHTML = '';

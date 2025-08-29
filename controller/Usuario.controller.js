@@ -2,13 +2,24 @@ const Usuario = require('../model/Usuarios')
 const { Op } = require('sequelize')
 
 const cadastrarUsuario = async (req, res) => {
-    const dados = req.body
     try {
-        const valores = await Usuario.create(dados)
-        res.status(201).json(valores)
+        let valores = req.body;
+        if (valores && valores.usuarios) {
+            valores = valores.usuarios;
+        }
+        if (!Array.isArray(valores)) {
+            return res.status(400).json({
+                message: "Formato inválido. Envie um array de usuários."
+            });
+        }
+        const dados = await Usuario.bulkCreate(valores);
+        res.status(201).json(dados);
     } catch (err) {
-        console.error('Erro ao Cadastrar os Dados')
-        res.status(500).json({ message: 'Erro ao cadastrar os dados' })
+        console.error("Erro ao cadastrar dados!", err);
+        res.status(500).json({
+            message: "Erro ao cadastrar os dados",
+            detalhe: err.message
+        });
     }
 }
 
@@ -68,7 +79,7 @@ const consultarNome = async (req, res) => {
     try {
         const valores = await Usuario.findAll({
             where: {
-                firstName: {
+                primeiroNome: {
                     [Op.like]: `%${nome}%`
                 }
             }

@@ -1,98 +1,95 @@
-const btnCadastrarProd = document.getElementById('btnCadastrarProd');
-const resProd = document.getElementById('resProd');
-
 btnCadastrarProd.addEventListener('click', () => {
     const title = document.getElementById('title').value.trim();
     const description = document.getElementById('description').value.trim();
     const category = document.getElementById('category').value.trim();
     const price = parseFloat(document.getElementById('price').value);
-    const discountPercentage = parseFloat(document.getElementById('discountPercentage').value.trim() / null);
+    const discountPercentageValue = document.getElementById('discountPercentage').value.trim();
+    const discountPercentage = discountPercentageValue ? parseFloat(discountPercentageValue) : null;
     const stock = parseInt(document.getElementById('stock').value);
     const brand = document.getElementById('brand').value.trim() || null;
     const thumbnail = document.getElementById('thumbnail').value.trim() || null;
 
-    if (
-        !title ||
-        !description ||
-        !category ||
-        isNaN(price) ||
-        isNaN(stock)
-    ) {
+    if (!title || !description || !category || isNaN(price) || isNaN(stock)) {
         resProd.innerHTML = `<strong style="color: red;">Preencha todos os campos obrigatórios corretamente.</strong>`;
         return;
     }
-
     const dados = {
-        title,
-        description,
-        category,
-        price,
-        discountPercentage,
-        stock,
-        brand,
-        thumbnail
+        produtos: [
+            {
+                title,
+                description,
+                category,
+                price,
+                discountPercentage,
+                stock,
+                brand,
+                thumbnail
+            }
+        ]
     };
-
-    resProd.innerHTML = '';
-    console.log('Enviando os seguintes dados para a API:', dados);
 
     fetch('http://localhost:3000/produtos', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dados)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados) 
     })
         .then(resp => resp.json())
         .then(valores => {
-            console.log('Resposta da API:', valores);
+            console.log('Resposta do backend:', valores);
             resProd.innerHTML = `<strong>Cadastro realizado com sucesso</strong>`;
         })
         .catch(err => {
-            console.error('Erro ao cadastrar os dados', err);
-            resProd.innerHTML = `<strong style="color: red;">Erro ao cadastrar os dados.</strong>`;
+            console.error('Erro ao cadastrar', err);
+            resProd.innerHTML = `<strong style="color: red;">Erro ao cadastrar.</strong>`;
         });
 });
+
+
+
 
 const btnCadastrarUser = document.getElementById("btnCadastrarUser");
 const resUser = document.getElementById("resUser");
 
 btnCadastrarUser.addEventListener("click", () => {
-    const firstName = document.getElementById("firstName").value.trim();
-    const lastName = document.getElementById("lastName").value.trim();
-    const age = parseInt(document.getElementById("age").value);
+    const primeiroNome = document.getElementById("primeiroNome").value.trim();
+    const sobrenome = document.getElementById("lastName").value.trim();
+    const idade = parseInt(document.getElementById("age").value);
     const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const address = document.getElementById("address").value.trim();
-    const city = document.getElementById("city").value.trim();
-    const state = document.getElementById("state").value.trim();
-    const birthDate = document.getElementById("birthDate").value.trim();
+    const telefone = document.getElementById("phone").value.trim();
+    const endereco = document.getElementById("address").value.trim();
+    const cidade = document.getElementById("city").value.trim();
+    const estado = document.getElementById("state").value.trim();
+    const dataNascimento = document.getElementById("birthDate").value.trim();
 
     if (
-        !firstName ||
-        !lastName ||
-        isNaN(age) ||
+        !primeiroNome ||
+        !sobrenome ||
+        isNaN(idade) ||
         !email ||
-        !phone ||
-        !address ||
-        !city ||
-        !state ||
-        !birthDate
+        !telefone ||
+        !endereco ||
+        !cidade ||
+        !estado ||
+        !dataNascimento
     ) {
         resUser.innerHTML = `<strong style="color: red;">Preencha todos os campos obrigatórios corretamente.</strong>`;
         return;
     }
 
     const dados = {
-        firstName,
-        lastName,
-        age,
-        email,
-        phone,
-        address,
-        city,
-        state,
-        birthDate
+        usuarios: [
+            {
+                primeiroNome,
+                sobrenome,
+                idade,
+                email,
+                telefone,
+                endereco,
+                cidade,
+                estado,
+                dataNascimento
+            }
+        ]
     };
 
     resUser.innerHTML = '';
@@ -115,3 +112,4 @@ btnCadastrarUser.addEventListener("click", () => {
             resUser.innerHTML = `<strong style="color: red;">Erro ao cadastrar os dados.</strong>`;
         });
 });
+

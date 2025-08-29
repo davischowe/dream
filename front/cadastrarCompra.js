@@ -39,7 +39,6 @@ btnCadastrar.addEventListener('click', (e) => {
         .then(resp => resp.json())
         .then(valores => {
             console.log(valores);
-
             res.innerHTML += `Compra cadastrada com sucesso!<br>`;
             res.innerHTML += `ID da Compra: ${valores.id}<br>`;
             res.innerHTML += `Usuário ID: ${valores.usuarioId}<br>`;
